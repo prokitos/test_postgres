@@ -1,0 +1,22 @@
+version: "2.1"
+
+networks:
+  ps:
+
+  postgresql:
+    image: postgres:14-alpine
+    container_name: ps-sql
+    ports:
+      - "5432:10000"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - spring.datasource.url=jdbc:postgresql://host.docker.internal:5432/pdu_app
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - ps
+
+
+
